@@ -1,0 +1,29 @@
+[
+  {
+    "name": "robot",
+    "className": "com.xilidou.framework.ioc.entity.Robot",
+    "propertyArgs": [
+      {
+        "name": "mouth",
+        "ref": "mouth"
+      }
+    ],
+    "constructorArgs": [
+      {
+        "index": 1,
+        "ref": "hand"
+      }
+    ]
+  },
+  {
+    "name": "hand",
+    "className": "com.xilidou.framework.ioc.entity.Hand"
+  },
+  {
+    "name": "mouth",
+    "className": "com.xilidou.framework.ioc.entity.Mouth"
+  }
+]
+
+
+

@@ -16,9 +16,10 @@ public class JsonApplicationContext extends BeanFactoryImpl{
 
     public JsonApplicationContext(String fileName) {
         this.fileName = fileName;
+        this.init();
     }
 
-    public void init(){
+    private void init(){
         loadFile();
     }
 

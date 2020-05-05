@@ -10,6 +10,6 @@ public class ConstructorArg {
 
     private int index;
     private String ref;
-    private String name;
+    private String type;
     private Object value;
 }
