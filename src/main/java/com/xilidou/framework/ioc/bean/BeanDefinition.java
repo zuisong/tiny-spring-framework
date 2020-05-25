@@ -1,7 +1,6 @@
 package com.xilidou.framework.ioc.bean;
 
 import lombok.Data;
-import lombok.ToString;
 
 import java.util.List;
 
@@ -10,7 +9,6 @@ import java.util.List;
  * @author Zhengxin
  */
 @Data
-@ToString
 public class BeanDefinition {
 
     private String name;

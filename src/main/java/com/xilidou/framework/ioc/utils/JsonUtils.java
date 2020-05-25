@@ -12,7 +12,21 @@ import static com.fasterxml.jackson.core.json.JsonReadFeature.*;
 
 
 public class JsonUtils {
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper mapper = new ObjectMapper()
+            .setSerializationInclusion(JsonInclude.Include.NON_NULL)
+//enable
+            .enable(SerializationFeature.INDENT_OUTPUT)
+            .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
+            .enable(ALLOW_SINGLE_QUOTES.mappedFeature())
+            .enable(ALLOW_YAML_COMMENTS.mappedFeature())
+            .enable(ALLOW_JAVA_COMMENTS.mappedFeature())
+            .enable(ALLOW_UNQUOTED_FIELD_NAMES.mappedFeature())
+            .enable(ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature())
+//disable
+            .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
+//date format
+            .setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 
     private JsonUtils() {
     }
@@ -61,21 +75,4 @@ public class JsonUtils {
         return mapper.writeValueAsBytes(entity);
     }
 
-    static {
-        mapper.enable(SerializationFeature.INDENT_OUTPUT)
-                .setSerializationInclusion(JsonInclude.Include.NON_NULL)
-                
-                .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
-                .enable(ALLOW_SINGLE_QUOTES.mappedFeature())
-                .enable(ALLOW_YAML_COMMENTS.mappedFeature())
-                .enable(ALLOW_JAVA_COMMENTS.mappedFeature())
-                .enable(ALLOW_UNQUOTED_FIELD_NAMES.mappedFeature())
-                .enable(ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature())
-
-                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-                .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
-                
-                .setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"))
-        ;
-    }
 }

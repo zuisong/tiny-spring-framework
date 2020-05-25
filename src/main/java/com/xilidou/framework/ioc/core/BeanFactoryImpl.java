@@ -51,7 +51,7 @@ public class BeanFactoryImpl implements BeanFactory {
 
     @SneakyThrows
     private void setProperty(Object bean, List<PropertyArg> propertyArgs) {
-        if (propertyArgs==null) {
+        if (propertyArgs == null) {
             return;
         }
 
@@ -77,10 +77,9 @@ public class BeanFactoryImpl implements BeanFactory {
 
     private Object createBean(BeanDefinition beanDefinition) throws Exception {
         String beanName = beanDefinition.getClassName();
-        Class<?> clz = ClassUtils.loadClass(beanName);
-        if (clz == null) {
-            throw new Exception("can not find bean by beanName");
-        }
+        Class<?> clz = ClassUtils
+                .loadClass(beanName)
+                .orElseThrow(() -> new Exception("can not find bean by beanName"));
         List<ConstructorArg> constructorArgs = beanDefinition.getConstructorArgs();
         if (constructorArgs == null || constructorArgs.isEmpty()) {
             return CligbBeanUtils.createInstance(clz, null, null);

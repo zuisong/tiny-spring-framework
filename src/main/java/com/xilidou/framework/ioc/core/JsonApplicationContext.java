@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author Zhengxin
  */
-public class JsonApplicationContext extends BeanFactoryImpl{
+public class JsonApplicationContext extends BeanFactoryImpl {
 
     private String fileName;
 
@@ -19,17 +19,18 @@ public class JsonApplicationContext extends BeanFactoryImpl{
         this.init();
     }
 
-    private void init(){
+    private void init() {
         loadFile();
     }
 
-    private void loadFile(){
+    private void loadFile() {
 
         InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
 
-        List<BeanDefinition> beanDefinitions = JsonUtils.readValue(is,new TypeReference<List<BeanDefinition>>(){});
+        List<BeanDefinition> beanDefinitions =
+                JsonUtils.readValue(is, new TypeReference<List<BeanDefinition>>() {});
 
-        if(beanDefinitions != null && !beanDefinitions.isEmpty()) {
+        if (beanDefinitions != null && !beanDefinitions.isEmpty()) {
 
             for (BeanDefinition beanDefinition : beanDefinitions) {
                 registerBean(beanDefinition.getName(), beanDefinition);

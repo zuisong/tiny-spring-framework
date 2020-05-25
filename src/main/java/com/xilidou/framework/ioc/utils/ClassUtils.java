@@ -1,19 +1,22 @@
 package com.xilidou.framework.ioc.utils;
 
+import java.util.Optional;
+
 public class ClassUtils {
 
-    public static ClassLoader getDefaultClassLoader(){
+    public static ClassLoader getDefaultClassLoader() {
         return Thread.currentThread().getContextClassLoader();
     }
 
-    public static Class loadClass(String className){
+    public static Optional<Class<?>> loadClass(String className) {
         try {
-            return getDefaultClassLoader().loadClass(className);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            Class<?> aClass = getDefaultClassLoader().loadClass(className);
+            return Optional.of(aClass);
+        } catch (ClassNotFoundException ignore) {
+
         }
 
-        return null;
+        return Optional.empty();
     }
 
 }
