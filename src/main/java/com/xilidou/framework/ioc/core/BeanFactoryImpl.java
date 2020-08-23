@@ -57,7 +57,7 @@ public class BeanFactoryImpl implements BeanFactory {
 
         for (PropertyArg proper : propertyArgs) {
 
-            Field field = CligbBeanUtils.getRawClass(bean)
+            Field field = CglibBeanUtils.getRawClass(bean)
                     .getDeclaredField(proper.getName());
             if (StringUtils.isNotBlank(proper.getRef())) {
                 ReflectionUtils.injectField(field, bean, getBean(proper.getRef()));
@@ -82,7 +82,7 @@ public class BeanFactoryImpl implements BeanFactory {
                 .orElseThrow(() -> new Exception("can not find bean by beanName"));
         List<ConstructorArg> constructorArgs = beanDefinition.getConstructorArgs();
         if (constructorArgs == null || constructorArgs.isEmpty()) {
-            return CligbBeanUtils.createInstance(clz, null, null);
+            return CglibBeanUtils.createInstance(clz, null, null);
         } else {
             List<Object> objects = new ArrayList<>();
             List<Class<?>> classes = new ArrayList<>();
@@ -97,18 +97,18 @@ public class BeanFactoryImpl implements BeanFactory {
                 } else {
                     Object bean = getBean(constructorArg.getRef());
                     objects.add(bean);
-                    classes.add(CligbBeanUtils.getRawClass(bean));
+                    classes.add(CglibBeanUtils.getRawClass(bean));
                 }
             }
             Class<?>[] constructorArgTypes = classes.toArray(new Class[]{});
             Constructor<?> constructor = clz.getConstructor(constructorArgTypes);
-            return CligbBeanUtils.createInstance(clz, constructor, objects.toArray());
+            return CglibBeanUtils.createInstance(clz, constructor, objects.toArray());
         }
     }
 
     private void populateBean(Object bean) throws Exception {
 
-        Field[] fields = CligbBeanUtils.getRawClass(bean)
+        Field[] fields = CglibBeanUtils.getRawClass(bean)
                 .getDeclaredFields();
 
         Arrays.stream(fields)

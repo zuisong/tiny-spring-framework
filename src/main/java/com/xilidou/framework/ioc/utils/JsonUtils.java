@@ -11,6 +11,9 @@ import java.text.SimpleDateFormat;
 import static com.fasterxml.jackson.core.json.JsonReadFeature.*;
 
 
+/**
+ * @author chen
+ */
 public class JsonUtils {
     private static final ObjectMapper mapper = new ObjectMapper()
             .setSerializationInclusion(JsonInclude.Include.NON_NULL)
@@ -31,48 +34,9 @@ public class JsonUtils {
     private JsonUtils() {
     }
 
-    public static ObjectMapper getObjectMapper() {
-        return mapper;
-    }
-
-    @SneakyThrows
-    public static <T> T readValue(String json, Class<T> cls) {
-        return mapper.readValue(json, cls);
-    }
-
-    @SneakyThrows
-    public static <T> T readValue(InputStream is, Class<T> cls) {
-        return mapper.readValue(is, cls);
-    }
-
-    @SneakyThrows
-    public static <T> T readValue(byte[] bytes, Class<T> cls) {
-        return mapper.readValue(bytes, cls);
-    }
-
-    @SneakyThrows
-    public static <T> T readValue(String json, TypeReference<T> valueTypeRef) {
-        return mapper.readValue(json, valueTypeRef);
-    }
-
-    @SneakyThrows
-    public static <T> T readValue(byte[] bytes, TypeReference<T> valueTypeRef) {
-        return mapper.readValue(bytes, valueTypeRef);
-    }
-
     @SneakyThrows
     public static <T> T readValue(InputStream is, TypeReference<T> valueTypeRef) {
         return mapper.readValue(is, valueTypeRef);
-    }
-
-    @SneakyThrows
-    public static String writeValueAsString(Object entity) {
-        return mapper.writeValueAsString(entity);
-    }
-
-    @SneakyThrows
-    public static byte[] writeValueAsBytes(Object entity) {
-        return mapper.writeValueAsBytes(entity);
     }
 
 }

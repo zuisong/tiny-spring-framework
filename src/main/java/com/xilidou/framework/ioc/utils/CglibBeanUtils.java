@@ -8,7 +8,7 @@ import java.lang.reflect.Constructor;
 /**
  * @author chen
  */
-public class CligbBeanUtils {
+public class CglibBeanUtils {
 
     public static <T> T createInstance(Class<?> clz, Constructor<?> ctr, Object[] args) {
         Enhancer enhancer = new Enhancer();
@@ -23,7 +23,7 @@ public class CligbBeanUtils {
     }
 
     public static Class<?> getRawClass(Object bean){
-        // 这里是 cligb 生成的子类  要加上getSuperclass 才是对的
+        // 这里是 cglib 生成的子类  要加上getSuperclass 才是对的
         return bean.getClass().getSuperclass();
     }
 
